@@ -15,6 +15,11 @@ const StyledContainerDiv = styled.div`
   padding-top: 24px;
 `;
 
+const StyledCompaniesFoundParagraph = styled.p`
+  color: #909296;
+  font-weight: 700;
+`;
+
 const mockCompanyNames = [
   'Beaver Builders',
   'ProBlue',
@@ -59,7 +64,9 @@ const MainContent: FunctionComponent<MainContentProps> = ({}) => {
     <StyledContainerDiv>
       <SearchBar companyNames={mockCompanyNames} />
       <CompaniesFilters />
-      <p style={{ color: '#909296', fontWeight: 700 }}>{mockCompanies.length} Companies found</p>
+      <StyledCompaniesFoundParagraph>
+        {mockCompanies.length} Companies found
+      </StyledCompaniesFoundParagraph>
       <CompaniesGrid companies={mockCompanies} />
     </StyledContainerDiv>
   );
