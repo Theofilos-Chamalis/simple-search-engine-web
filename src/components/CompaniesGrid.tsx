@@ -9,9 +9,10 @@ interface CompaniesGridProps {
 const StyledContainerGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 3%;
+  column-gap: 3%;
+  row-gap: 2%;
   justify-items: center;
-  padding-bottom: 120px;
+  padding-bottom: 160px;
 `;
 
 const CompaniesGrid: FunctionComponent<CompaniesGridProps> = ({ companies }) => {

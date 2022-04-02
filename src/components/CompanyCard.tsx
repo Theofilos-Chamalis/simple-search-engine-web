@@ -12,10 +12,10 @@ export interface ICompany {
 
 // To Be Moved to Services
 export enum ISpecialty {
-  EXCAVATION = 'excavation',
-  PLUMBING = 'plumbing',
-  ELECTRICAL = 'electrical',
-  PAINTING = 'painting',
+  ELECTRICAL = 'Electrical',
+  EXCAVATION = 'Excavation',
+  PAINTING = 'Painting',
+  PLUMBING = 'Plumbing',
 }
 
 export enum ICity {

@@ -16,7 +16,7 @@ const StyledImage = styled.img`
 
 const StyledHeaderTitle = styled.h1`
   margin: auto;
-  font-weight: 500;
+  font-weight: 800;
 `;
 
 const MainHeader: FunctionComponent<MainHeaderProps> = ({}) => {

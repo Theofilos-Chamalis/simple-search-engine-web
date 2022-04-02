@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import CompaniesGrid from './CompaniesGrid';
 import { ICity, ICompany, ISpecialty } from './CompanyCard';
+import CompaniesFilters from './CompaniesFilters';
 
 interface MainContentProps {}
 
@@ -35,7 +36,7 @@ const mockDescriptions = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ita ne hoc quidem modo paria peccata sunt.',
   'Cumoe audissem Antiochum, Brute, ut solebam, cum M. In his igitur partibus duabus nihil erat, quod Zeno.',
   'Commutare gestiret duo Reges: constructio interrete. Quid ait Aristoteles reliquique Platonis alumni.',
-  'Quod maxime efficit Theophrasti de beata vita liber, in quo multum admodum fortunae datur. Luxuriam non reprehendit.',
+  'Quod maxime efficit Theophrasti de beata vita liber, in quo multum admodum fortunae datur luxuriam no.',
 ];
 const mockLogos = [
   'https://picsum.photos/id/320/300',
@@ -57,7 +58,8 @@ const MainContent: FunctionComponent<MainContentProps> = ({}) => {
   return (
     <StyledContainerDiv>
       <SearchBar companyNames={mockCompanyNames} />
-      <h1>{mockCompanies.length} Construction Companies</h1>
+      <CompaniesFilters />
+      <p style={{ color: '#909296', fontWeight: 700 }}>{mockCompanies.length} Companies found</p>
       <CompaniesGrid companies={mockCompanies} />
     </StyledContainerDiv>
   );
