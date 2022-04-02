@@ -3,16 +3,24 @@ import { Autocomplete } from '@mantine/core';
 
 interface SearchBarProps {
   companyNames: string[];
+  searchValue: string;
+  setSearchValue: (val: string) => void;
 }
 
-const SearchBar: FunctionComponent<SearchBarProps> = ({ companyNames }) => {
+const SearchBar: FunctionComponent<SearchBarProps> = ({
+  companyNames,
+  searchValue,
+  setSearchValue,
+}) => {
   return (
     <Autocomplete
-      data={companyNames}
+      data={companyNames || ['']}
       placeholder={'Search...'}
       size={'lg'}
       label={'FIND A COMPANY'}
       labelProps={{ style: { fontWeight: 800, fontSize: 26 } }}
+      value={searchValue}
+      onChange={setSearchValue}
       radius={'md'}
       limit={3}
       icon={

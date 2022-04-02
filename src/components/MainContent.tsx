@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import CompaniesGrid from './CompaniesGrid';
 import { ICity, ICompany, ISpecialty } from './CompanyCard';
 import CompaniesFilters from './CompaniesFilters';
+import { useDebouncedValue } from '@mantine/hooks';
 
 interface MainContentProps {}
 
@@ -60,14 +61,44 @@ const mockCompanies: ICompany[] = mockCompanyNames.map((item, idx) => ({
 }));
 
 const MainContent: FunctionComponent<MainContentProps> = ({}) => {
+  const [searchValue, setSearchValue] = useState('');
+  const [debouncedSearchValue] = useDebouncedValue(searchValue, 500);
+  const [shownCompanies, setShownCompanies] = useState(mockCompanies);
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([true, true, true, true]);
+
+  useEffect(() => {
+    const filteredCompaniesFromSearch = mockCompanies.filter(item => {
+      return item.name.toLowerCase().includes(searchValue.trim().toLowerCase());
+    });
+
+    const selectedSpecialtiesValues = Object.values(ISpecialty).filter(
+      (item, idx) => selectedCheckboxes[idx],
+    );
+
+    const filteredCompanies = filteredCompaniesFromSearch.filter(company => {
+      return company.specialties.some(specialty => {
+        return selectedSpecialtiesValues.includes(specialty);
+      });
+    });
+
+    setShownCompanies(filteredCompanies);
+  }, [debouncedSearchValue, selectedCheckboxes]);
+
   return (
     <StyledContainerDiv>
-      <SearchBar companyNames={mockCompanyNames} />
-      <CompaniesFilters />
+      <SearchBar
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        companyNames={searchValue.trim() ? shownCompanies.map(item => item.name) : []}
+      />
+      <CompaniesFilters
+        selectedCheckboxes={selectedCheckboxes}
+        setSelectedCheckboxes={setSelectedCheckboxes}
+      />
       <StyledCompaniesFoundParagraph>
-        {mockCompanies.length} Companies found
+        {shownCompanies.length} Companies found
       </StyledCompaniesFoundParagraph>
-      <CompaniesGrid companies={mockCompanies} />
+      <CompaniesGrid companies={shownCompanies} />
     </StyledContainerDiv>
   );
 };

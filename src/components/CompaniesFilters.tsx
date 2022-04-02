@@ -3,14 +3,20 @@ import { Checkbox, CheckboxGroup } from '@mantine/core';
 import styled from '@emotion/styled';
 import { ISpecialty } from './CompanyCard';
 
-interface CompaniesFiltersProps {}
+interface CompaniesFiltersProps {
+  selectedCheckboxes: boolean[];
+  setSelectedCheckboxes: (val: (prevState: boolean[]) => boolean[]) => void;
+}
 
 const StyledCheckboxContainerDiv = styled.div`
   margin-top: 12px;
   margin-bottom: 20px;
 `;
 
-const CompaniesFilters: FunctionComponent<CompaniesFiltersProps> = ({}) => {
+const CompaniesFilters: FunctionComponent<CompaniesFiltersProps> = ({
+  selectedCheckboxes,
+  setSelectedCheckboxes,
+}) => {
   return (
     <StyledCheckboxContainerDiv>
       <CheckboxGroup
@@ -25,10 +31,58 @@ const CompaniesFilters: FunctionComponent<CompaniesFiltersProps> = ({}) => {
         labelProps={{ style: { fontWeight: 800 } }}
         spacing="sm"
         style={{ fontWeight: 600 }}>
-        <Checkbox value={ISpecialty.ELECTRICAL} label={ISpecialty.ELECTRICAL} />
-        <Checkbox value={ISpecialty.EXCAVATION} label={ISpecialty.EXCAVATION} />
-        <Checkbox value={ISpecialty.PAINTING} label={ISpecialty.PAINTING} />
-        <Checkbox value={ISpecialty.PLUMBING} label={ISpecialty.PLUMBING} />
+        <Checkbox
+          value={ISpecialty.ELECTRICAL}
+          checked={selectedCheckboxes[0]}
+          label={ISpecialty.ELECTRICAL}
+          onClick={() => {
+            setSelectedCheckboxes((prevState: boolean[]) => [
+              !prevState[0],
+              prevState[1],
+              prevState[2],
+              prevState[3],
+            ]);
+          }}
+        />
+        <Checkbox
+          value={ISpecialty.EXCAVATION}
+          checked={selectedCheckboxes[1]}
+          label={ISpecialty.EXCAVATION}
+          onClick={() =>
+            setSelectedCheckboxes((prevState: boolean[]) => [
+              prevState[0],
+              !prevState[1],
+              prevState[2],
+              prevState[3],
+            ])
+          }
+        />
+        <Checkbox
+          value={ISpecialty.PAINTING}
+          checked={selectedCheckboxes[2]}
+          label={ISpecialty.PAINTING}
+          onClick={() =>
+            setSelectedCheckboxes((prevState: boolean[]) => [
+              prevState[0],
+              prevState[1],
+              !prevState[2],
+              prevState[3],
+            ])
+          }
+        />
+        <Checkbox
+          value={ISpecialty.PLUMBING}
+          checked={selectedCheckboxes[3]}
+          label={ISpecialty.PLUMBING}
+          onClick={() =>
+            setSelectedCheckboxes((prevState: boolean[]) => [
+              prevState[0],
+              prevState[1],
+              prevState[2],
+              !prevState[3],
+            ])
+          }
+        />
       </CheckboxGroup>
     </StyledCheckboxContainerDiv>
   );
