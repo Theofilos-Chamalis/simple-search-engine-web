@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import CompanyCard, { Company } from './CompanyCard';
+import CompanyCard, { ICompany } from './CompanyCard';
 import styled from '@emotion/styled';
 
 interface CompaniesGridProps {
-  companies: Company[];
+  companies: ICompany[];
 }
 
 const StyledContainerGrid = styled.div`

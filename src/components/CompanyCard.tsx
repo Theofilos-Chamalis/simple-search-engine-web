@@ -2,16 +2,32 @@ import { FunctionComponent } from 'react';
 import { Badge, Button, Card, useMantineTheme } from '@mantine/core';
 import styled from '@emotion/styled';
 
-export interface Company {
+export interface ICompany {
   name: string;
-  specialties: string[];
-  city: string;
+  specialties: ISpecialty[];
+  city: ICity;
   description: string;
   logo: string;
 }
 
+// To Be Moved to Services
+export enum ISpecialty {
+  EXCAVATION = 'excavation',
+  PLUMBING = 'plumbing',
+  ELECTRICAL = 'electrical',
+  PAINTING = 'painting',
+}
+
+export enum ICity {
+  BERLIN = 'berlin',
+  HAMBURG = 'hamburg',
+  MUNICH = 'munich',
+  FRANKFURT = 'frankfurt',
+  STUTTGART = 'stuttgart',
+}
+
 interface CompanyCardProps {
-  company: Company;
+  company: ICompany;
 }
 
 interface StyledDividerProps {

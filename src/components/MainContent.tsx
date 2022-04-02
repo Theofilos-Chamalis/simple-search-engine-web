@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import CompaniesGrid from './CompaniesGrid';
-import { Company } from './CompanyCard';
+import { ICity, ICompany, ISpecialty } from './CompanyCard';
 
 interface MainContentProps {}
 
@@ -24,8 +24,13 @@ const mockCompanyNames = [
   'Alaska Designs',
 ];
 
-const mockSpecialties = ['Excavation', 'Plumbing', 'Electrical', 'Painting'];
-const mockCities = ['Berlin', 'Hamburg', 'Munich', 'Frankfurt', 'Stuttgart'];
+const mockSpecialties = [
+  ISpecialty.EXCAVATION,
+  ISpecialty.PLUMBING,
+  ISpecialty.ELECTRICAL,
+  ISpecialty.PAINTING,
+];
+const mockCities = [ICity.BERLIN, ICity.HAMBURG, ICity.MUNICH, ICity.FRANKFURT, ICity.STUTTGART];
 const mockDescriptions = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ita ne hoc quidem modo paria peccata sunt.',
   'Cumoe audissem Antiochum, Brute, ut solebam, cum M. In his igitur partibus duabus nihil erat, quod Zeno.',
@@ -40,7 +45,7 @@ const mockLogos = [
   'https://picsum.photos/id/324/300',
 ];
 
-const mockCompanies: Company[] = mockCompanyNames.map((item, idx) => ({
+const mockCompanies: ICompany[] = mockCompanyNames.map((item, idx) => ({
   name: item,
   specialties: [mockSpecialties[(idx + 1) % 4], mockSpecialties[(idx + 3) % 4]],
   description: mockDescriptions[idx % 4],
