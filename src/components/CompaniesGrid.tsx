@@ -8,12 +8,10 @@ interface CompaniesGridProps {
 
 const StyledContainerGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 2%;
-  grid-template-rows: max-content;
-  grid-row-gap: 4%;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 3%;
   justify-items: center;
-  margin-top: 32px;
+  padding-bottom: 120px;
 `;
 
 const CompaniesGrid: FunctionComponent<CompaniesGridProps> = ({ companies }) => {

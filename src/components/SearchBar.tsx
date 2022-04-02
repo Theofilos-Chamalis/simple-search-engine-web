@@ -11,7 +11,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ companyNames }) => {
       data={companyNames}
       placeholder={'Search company...'}
       size={'lg'}
-      radius={'xl'}
+      radius={'md'}
       limit={3}
       icon={
         <img src={'/src/assets/magnifying-glass-solid.svg'} alt={'Searchbar icon'} width={24} />
