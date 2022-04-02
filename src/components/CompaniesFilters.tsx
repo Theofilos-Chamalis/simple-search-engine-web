@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Checkbox, CheckboxGroup } from '@mantine/core';
 import styled from '@emotion/styled';
-import { ISpecialty } from './CompanyCard';
+import { ISpecialty } from '../services/companies/companies.dto';
 
 interface CompaniesFiltersProps {
   selectedCheckboxes: boolean[];

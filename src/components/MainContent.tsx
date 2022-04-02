@@ -2,9 +2,9 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import CompaniesGrid from './CompaniesGrid';
-import { ICity, ICompany, ISpecialty } from './CompanyCard';
 import CompaniesFilters from './CompaniesFilters';
 import { useDebouncedValue } from '@mantine/hooks';
+import { CompanyDTO, ICity, ISpecialty } from '../services/companies/companies.dto';
 
 interface MainContentProps {}
 
@@ -52,7 +52,7 @@ const mockLogos = [
   'https://picsum.photos/id/324/300',
 ];
 
-const mockCompanies: ICompany[] = mockCompanyNames.map((item, idx) => ({
+const mockCompanies: CompanyDTO[] = mockCompanyNames.map((item, idx) => ({
   name: item,
   specialties: [mockSpecialties[(idx + 1) % 4], mockSpecialties[(idx + 3) % 4]],
   description: mockDescriptions[idx % 4],

@@ -1,33 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Badge, Button, Card, useMantineTheme } from '@mantine/core';
 import styled from '@emotion/styled';
-
-export interface ICompany {
-  name: string;
-  specialties: ISpecialty[];
-  city: ICity;
-  description: string;
-  logo: string;
-}
-
-// To Be Moved to Services
-export enum ISpecialty {
-  ELECTRICAL = 'Electrical',
-  EXCAVATION = 'Excavation',
-  PAINTING = 'Painting',
-  PLUMBING = 'Plumbing',
-}
-
-export enum ICity {
-  BERLIN = 'berlin',
-  HAMBURG = 'hamburg',
-  MUNICH = 'munich',
-  FRANKFURT = 'frankfurt',
-  STUTTGART = 'stuttgart',
-}
+import { CompanyDTO } from '../services/companies/companies.dto';
 
 interface CompanyCardProps {
-  company: ICompany;
+  company: CompanyDTO;
 }
 
 interface StyledDividerProps {
