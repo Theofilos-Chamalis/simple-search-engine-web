@@ -1,12 +1,15 @@
-import './styles/App.css'
+import { FunctionComponent } from 'react';
+import MainContainer from './components/MainContainer';
+import MainContent from './components/MainContent';
 
-function App() {
+interface AppProps {}
 
+const App: FunctionComponent<AppProps> = ({}) => {
   return (
-    <div className="App">
-        <p style={{fontWeight: 400}}>Hello world</p>
-    </div>
-  )
-}
+    <MainContainer>
+      <MainContent />
+    </MainContainer>
+  );
+};
 
-export default App
+export default App;

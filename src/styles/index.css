@@ -1,6 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F1F3F5;
 }
+
+
+/* primary-color: #536DFE */
+/* secondary-color: #6A3DE8 */
+/* primary-color: #FFFFFF */
