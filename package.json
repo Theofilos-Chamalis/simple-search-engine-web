@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "author": "Theofilos Chamalis",
   "scripts": {
-    "open-browser": "open http://localhost:3000",
+    "open-browser": "open http://localhost:3200",
     "dev": "yarn open-browser && vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
