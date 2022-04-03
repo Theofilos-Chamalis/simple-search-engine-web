@@ -1,3 +1,8 @@
+/**
+ * Data Transfer Object and Interfaces for the incoming
+ * payload data from the BE.
+ */
+
 export enum ISpecialty {
   ELECTRICAL = 'Electrical',
   EXCAVATION = 'Excavation',

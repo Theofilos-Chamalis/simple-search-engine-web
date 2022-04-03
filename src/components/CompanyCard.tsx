@@ -29,6 +29,15 @@ const StyledCityContainerDiv = styled.div`
   align-items: center;
 `;
 
+/**
+ * The CompanyCard component is responsible for rendering a company's information
+ * (Logo, Name, Specialties, City, Description) in a card format as well as having
+ * a mock button to contact each company respectively.
+ *
+ * @param {CompanyDTO} company
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CompanyCard: FunctionComponent<CompanyCardProps> = ({ company }) => {
   const theme = useMantineTheme();
 

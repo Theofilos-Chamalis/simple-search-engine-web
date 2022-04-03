@@ -16,6 +16,14 @@ const StyledContainerGrid = styled.div`
   padding-bottom: 160px;
 `;
 
+/**
+ * The component that renders a grid of CompanyCard components based on
+ * the companies that are retrieved from the BE.
+ *
+ * @param {CompanyDTO[]} companies
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CompaniesGrid: FunctionComponent<CompaniesGridProps> = ({ companies }) => {
   return (
     <StyledContainerGrid>

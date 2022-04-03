@@ -22,6 +22,14 @@ const StyledCompaniesFoundParagraph = styled.p`
   font-weight: 700;
 `;
 
+/**
+ * This component is responsible for rendering all the content below
+ * the application's Header and for performing an API call to the BE
+ * to fetch the list of construction companies.
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MainContent: FunctionComponent<MainContentProps> = ({}) => {
   const [companies, setCompanies] = useState<CompanyDTO[]>([]);
   const [searchValue, setSearchValue] = useState('');
@@ -29,6 +37,8 @@ const MainContent: FunctionComponent<MainContentProps> = ({}) => {
   const [shownCompanies, setShownCompanies] = useState(companies);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([true, true, true, true]);
 
+  // Perform an API call to the BE to fetch the list of construction companies
+  // just after the page is mounted.
   useEffect(() => {
     getCompaniesService()
       .then(res => {
@@ -46,6 +56,8 @@ const MainContent: FunctionComponent<MainContentProps> = ({}) => {
       });
   }, []);
 
+  // Filter out companies from the state based on the (debounced) search value
+  // and the selected checkboxes.
   useEffect(() => {
     if (!companies) return;
 
