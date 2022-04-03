@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Checkbox, CheckboxGroup } from '@mantine/core';
 import styled from '@emotion/styled';
-import { ISpecialty } from './CompanyCard';
+import { ISpecialty } from '../services/companies/companies.dto';
 
 interface CompaniesFiltersProps {
   selectedCheckboxes: boolean[];
@@ -13,6 +13,16 @@ const StyledCheckboxContainerDiv = styled.div`
   margin-bottom: 20px;
 `;
 
+/**
+ * The checkbox group component that is responsible for showing the company
+ * filters based on their speciality.
+ *
+ *
+ * @param {boolean[]} selectedCheckboxes
+ * @param {(val: (prevState: boolean[]) => boolean[]) => void} setSelectedCheckboxes
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CompaniesFilters: FunctionComponent<CompaniesFiltersProps> = ({
   selectedCheckboxes,
   setSelectedCheckboxes,

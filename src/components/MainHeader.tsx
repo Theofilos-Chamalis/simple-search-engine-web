@@ -19,6 +19,14 @@ const StyledHeaderTitle = styled.h1`
   font-weight: 800;
 `;
 
+/**
+ * The header that is shown on the top of the page. It shows the
+ * application logo on the left and the application name in the
+ * center.
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MainHeader: FunctionComponent<MainHeaderProps> = ({}) => {
   return (
     <Header height={60} p="xs">

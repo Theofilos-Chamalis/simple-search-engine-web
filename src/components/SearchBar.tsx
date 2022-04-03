@@ -7,6 +7,17 @@ interface SearchBarProps {
   setSearchValue: (val: string) => void;
 }
 
+/**
+ * The searchbar component for filtering out a company based on
+ * its name. This component also has an autocomplete functionality
+ * which suggests a company name (max 3) after you have started typing.
+ *
+ * @param {string[]} companyNames
+ * @param {string} searchValue
+ * @param {(val: string) => void} setSearchValue
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SearchBar: FunctionComponent<SearchBarProps> = ({
   companyNames,
   searchValue,

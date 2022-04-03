@@ -2,9 +2,10 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import SearchBar from './SearchBar';
 import CompaniesGrid from './CompaniesGrid';
-import { ICity, ICompany, ISpecialty } from './CompanyCard';
 import CompaniesFilters from './CompaniesFilters';
 import { useDebouncedValue } from '@mantine/hooks';
+import { CompanyDTO, ISpecialty } from '../services/companies/companies.dto';
+import { getCompaniesService } from '../services';
 
 interface MainContentProps {}
 
@@ -21,53 +22,46 @@ const StyledCompaniesFoundParagraph = styled.p`
   font-weight: 700;
 `;
 
-const mockCompanyNames = [
-  'Beaver Builders',
-  'ProBlue',
-  'GreenPower',
-  'Contractors New',
-  'Destiny Homes',
-  'Granite Constructions',
-  'Alaska Designs',
-];
-
-const mockSpecialties = [
-  ISpecialty.EXCAVATION,
-  ISpecialty.PLUMBING,
-  ISpecialty.ELECTRICAL,
-  ISpecialty.PAINTING,
-];
-const mockCities = [ICity.BERLIN, ICity.HAMBURG, ICity.MUNICH, ICity.FRANKFURT, ICity.STUTTGART];
-const mockDescriptions = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ita ne hoc quidem modo paria peccata sunt.',
-  'Cumoe audissem Antiochum, Brute, ut solebam, cum M. In his igitur partibus duabus nihil erat, quod Zeno.',
-  'Commutare gestiret duo Reges: constructio interrete. Quid ait Aristoteles reliquique Platonis alumni.',
-  'Quod maxime efficit Theophrasti de beata vita liber, in quo multum admodum fortunae datur luxuriam no.',
-];
-const mockLogos = [
-  'https://picsum.photos/id/320/300',
-  'https://picsum.photos/id/321/300',
-  'https://picsum.photos/id/322/300',
-  'https://picsum.photos/id/323/300',
-  'https://picsum.photos/id/324/300',
-];
-
-const mockCompanies: ICompany[] = mockCompanyNames.map((item, idx) => ({
-  name: item,
-  specialties: [mockSpecialties[(idx + 1) % 4], mockSpecialties[(idx + 3) % 4]],
-  description: mockDescriptions[idx % 4],
-  city: mockCities[idx % 5],
-  logo: mockLogos[idx % 5],
-}));
-
+/**
+ * This component is responsible for rendering all the content below
+ * the application's Header and for performing an API call to the BE
+ * to fetch the list of construction companies.
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MainContent: FunctionComponent<MainContentProps> = ({}) => {
+  const [companies, setCompanies] = useState<CompanyDTO[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [debouncedSearchValue] = useDebouncedValue(searchValue, 500);
-  const [shownCompanies, setShownCompanies] = useState(mockCompanies);
+  const [shownCompanies, setShownCompanies] = useState(companies);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([true, true, true, true]);
 
+  // Perform an API call to the BE to fetch the list of construction companies
+  // just after the page is mounted.
   useEffect(() => {
-    const filteredCompaniesFromSearch = mockCompanies.filter(item => {
+    getCompaniesService()
+      .then(res => {
+        if (!res || !res?.ok || !res?.data) return;
+
+        const companiesArray = res.data;
+
+        setCompanies(companiesArray);
+        setShownCompanies(companiesArray);
+      })
+      .catch(err => {
+        setCompanies([]);
+        setShownCompanies([]);
+        return;
+      });
+  }, []);
+
+  // Filter out companies from the state based on the (debounced) search value
+  // and the selected checkboxes.
+  useEffect(() => {
+    if (!companies) return;
+
+    const filteredCompaniesFromSearch = companies.filter(item => {
       return item.name.toLowerCase().includes(searchValue.trim().toLowerCase());
     });
 
@@ -98,7 +92,7 @@ const MainContent: FunctionComponent<MainContentProps> = ({}) => {
       <StyledCompaniesFoundParagraph>
         {shownCompanies.length} Companies found
       </StyledCompaniesFoundParagraph>
-      <CompaniesGrid companies={shownCompanies} />
+      {shownCompanies.length > 0 && <CompaniesGrid companies={shownCompanies} />}
     </StyledContainerDiv>
   );
 };
